@@ -11,6 +11,7 @@
     "@neynar/nodejs-sdk": "^1.14.0",
     "frog": "latest",
     "hono": "^4",
+    "html2canvas": "^1.4.1",
     "ioredis": "^5.3.2"
   },
   "devDependencies": {
