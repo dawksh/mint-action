@@ -36,7 +36,7 @@ app.hono.post("/mint", async (c) => {
 
       await mintNFT(interactor.verified_addresses.eth_addresses[0], image, display_name, interactor.display_name);
 
-      message = `Check wallet for NFT`;
+      message = `Cast minted on Base`;
     }
     return c.json({ message });
   } else {
