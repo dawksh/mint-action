@@ -1,13 +1,10 @@
 import { Frog } from "frog";
 import { devtools } from "frog/dev";
 import { serveStatic } from "frog/serve-static";
-import { neynar as neynarHub } from "frog/hubs";
-import { neynar } from "frog/middlewares";
 import { handle } from "frog/vercel";
 import { CastParamType, NeynarAPIClient } from "@neynar/nodejs-sdk";
 
-
-const NEYNAR_API_KEY = process.env.NEYNAR_API_KEY ?? "";
+const NEYNAR_API_KEY = process.env.NEYNAR_API_KEY ?? "NEYNAR_FROG_FM";
 const neynarClient = new NeynarAPIClient(NEYNAR_API_KEY);
 
 export const app = new Frog({
@@ -34,7 +31,7 @@ app.hono.post("/mint", async (c) => {
     let message = "Empty cast, try it on a cast with text."
     if (hash) {
       const image = `https://client.warpcast.com/v2/cast-image?castHash=${hash}`
-      message = `You minted this cast as NFT on Base`;
+      message = `Check wallet for NFT`;
     }
     return c.json({ message });
   } else {
