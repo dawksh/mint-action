@@ -437,6 +437,5 @@ export const mintNFT = async (address: string, image: string, display_name: stri
         description: `This is a cast by ${display_name} on Farcaster. Minted by ${interactor}`,
         image
     }
-    const txn = await contract["mint"](JSON.stringify(metadata), address);
-    await txn.wait();
+    contract["mint"](JSON.stringify(metadata), address);
 }
