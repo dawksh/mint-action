@@ -1,5 +1,6 @@
 import { JsonRpcProvider, Wallet, ethers } from "ethers";
-
+import { config } from "dotenv";
+config();
 const abi = [
     {
         "type": "constructor",
@@ -437,4 +438,5 @@ export const mintNFT = async (address: string, image: string, display_name: stri
         image
     }
     const txn = await contract["mint"](JSON.stringify(metadata), address);
+    await txn.wait();
 }
