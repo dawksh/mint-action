@@ -3,6 +3,7 @@ import { devtools } from "frog/dev";
 import { serveStatic } from "frog/serve-static";
 import { handle } from "frog/vercel";
 import { CastParamType, NeynarAPIClient } from "@neynar/nodejs-sdk";
+import { mintNFT } from "../lib/mint.js"
 
 const NEYNAR_API_KEY = process.env.NEYNAR_API_KEY ?? "NEYNAR_FROG_FM";
 const neynarClient = new NeynarAPIClient(NEYNAR_API_KEY);
@@ -21,16 +22,20 @@ app.hono.post("/mint", async (c) => {
   } = await c.req.json();
 
   const result = await neynarClient.validateFrameAction(messageBytes);
+  const { interactor } = result.action;
   if (result.valid) {
     const { cast } = await neynarClient.lookUpCastByHashOrWarpcastUrl(
       result.action.cast.hash,
       CastParamType.Hash
     );
-    const { hash } = cast;
+    const { hash, author: { display_name } } = cast;
 
     let message = "Empty cast, try it on a cast with text."
     if (hash) {
       const image = `https://client.warpcast.com/v2/cast-image?castHash=${hash}`
+
+      mintNFT(interactor.verified_addresses.eth_addresses[0], image, display_name, interactor.display_name);
+
       message = `Check wallet for NFT`;
     }
     return c.json({ message });
