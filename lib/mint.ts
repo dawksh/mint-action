@@ -426,7 +426,7 @@ const abi = [
 const wallet = new Wallet(process.env.PRIVATE_KEY as string, new JsonRpcProvider(process.env.PROVIDER))
 
 const contract = new ethers.Contract(
-    "0x676a90dBA681e0EBAFBaea1A2eB68a5dC885FFb4",
+    "0xdB7757ef2f95A6ddBC8Dba84B09c4915B209e1B1",
     abi,
     wallet
 );
