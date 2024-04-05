@@ -34,7 +34,7 @@ app.hono.post("/mint", async (c) => {
     if (hash) {
       const image = `https://client.warpcast.com/v2/cast-image?castHash=${hash}`
 
-      mintNFT(interactor.verified_addresses.eth_addresses[0], image, display_name, interactor.display_name);
+      await mintNFT(interactor.verified_addresses.eth_addresses[0], image, display_name, interactor.display_name);
 
       message = `Check wallet for NFT`;
     }
