@@ -10,9 +10,6 @@ import { CastParamType, NeynarAPIClient } from "@neynar/nodejs-sdk";
 const NEYNAR_API_KEY = process.env.NEYNAR_API_KEY ?? "";
 const neynarClient = new NeynarAPIClient(NEYNAR_API_KEY);
 
-const ADD_URL =
-  "https://warpcast.com/~/add-cast-action?name=Upthumb&icon=thumbsup&actionType=post&postUrl=";
-
 export const app = new Frog({
   assetsPath: "/",
   basePath: "/api",
@@ -21,7 +18,7 @@ export const app = new Frog({
 })
 
 // Cast action handler
-app.hono.post("/upthumb", async (c) => {
+app.hono.post("/mint", async (c) => {
   const {
     trustedData: { messageBytes },
   } = await c.req.json();
